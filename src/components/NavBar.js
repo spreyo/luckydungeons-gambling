@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import cookie from "react-cookies"
 
-export const NavBar = () => {
+export const NavBar = ({ diamonds }) => {
     return (
         <>
             <div className="navbar bg-neutral">
@@ -30,7 +31,7 @@ export const NavBar = () => {
                             <details>
                                 <summary>GAMES</summary>
                                 <ul className="p-2">
-                                    <li><a>COINFLIP</a></li>
+                                    <li><a href="/coinflip">COINFLIP</a></li>
                                 </ul>
                             </details>
                         </li>
@@ -38,7 +39,12 @@ export const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-2 ">
-                    <a className="btn btn-primary" href="/login" >login</a>
+                    <>{cookie.load("loggedin") ? <><a>{cookie.load("username")}<p>{diamonds}</p></a></> :
+                        <>
+
+                            <a className="btn btn-primary" href="/login" >login</a>
+                        </>
+                    }</>
                 </div>
             </div></>
     )
